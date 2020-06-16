@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Mobile from "./components/mobileinput/mobileInput";
+import Verify from "./components/verify/verify";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      route: "signin",
+    };
+  }
+
+onRouteChange = () => {
+ let otp = prompt("Enter the OTP")
+
+ if (Number(otp) === 1234) {
+  this.setState({route:'home'})
+  } else {
+    return alert("Please Enter Correct Otp")
+  }
+}
+
+
+  render() {
+    return (
+      <div className='tc'>
+
+     
+
+
+        {this.state.route === "signin" ? (
+          <Mobile onRouteChange ={this.onRouteChange} />
+        ) : (
+          <div>
+            <Verify />
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
 export default App;
